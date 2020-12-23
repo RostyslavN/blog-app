@@ -1,0 +1,48 @@
+  <input
+    type="button"
+    value="Edit"
+    class="btn btn-primary"
+    (click)="openModal(modalContent)">
+
+  <ng-template #modalContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Post edit</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form
+        #editPostForm="ngForm"
+        ngNativeValidate
+        (ngSubmit)="savePost(editPostForm)">
+        <div class="post-editing-block">
+          <label class="form-group">
+            <span class="text-dark">Post theme:</span>
+            <input
+              type="text"
+              name="theme"
+              class="form-control"
+              required
+              [ngModel]="postToEdit.theme">
+          </label>
+          <label class="form-group">
+            <span class="text-dark">Post text:</span>
+            <textarea
+              type="text"
+              name="text"
+              class="form-control"
+              required
+              [ngModel]="postToEdit.text"></textarea>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="Save" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </ng-template>

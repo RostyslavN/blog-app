@@ -1,0 +1,8 @@
+.post-editing-block {
+  display: flex;
+  flex-direction: column;
+}
+textarea {
+  height: 200px;
+  resize: none;
+}

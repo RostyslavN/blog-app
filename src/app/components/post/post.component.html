@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <span class="text-muted">Created by </span>
+    <span class="font-weight-bold">{{ post.creator.name || post.creator.login}} </span>
+    <span class="text-muted" *ngIf="post.creator.name === currentUser.name">(you)</span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ post.theme }}</h5>
+    <p class="card-text">{{ post.text }}</p>
+  </div>
+  <div class="card-footer">
+    <span class="text-muted">{{ post.creatingDate | date:'medium' }}</span>
+    <div class="buttons">
+      <app-edit-post
+        [postToEdit]="post"
+        *ngIf="currentUser.login === post.creator.login || currentUser.login === 'Admin'">
+      </app-edit-post>
+      <input
+        type="button"
+        value="Delete"
+        class="btn btn-danger"
+        (click)="deletePost()"
+        *ngIf="currentUser.login === 'Admin'">
+    </div>
+  </div>
+</div>

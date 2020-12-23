@@ -1,0 +1,27 @@
+<form
+  #addPostForm="ngForm"
+  ngNativeValidate
+  (ngSubmit)="addPost(addPostForm)">
+  <label class="form-group">
+    <span class="text-dark">Post theme:</span>
+    <input
+      type="text"
+      name="theme"
+      class="form-control"
+      required
+      ngModel>
+  </label>
+  <label class="form-group">
+    <span class="text-dark">Post text:</span>
+    <textarea
+      name="text"
+      class="form-control"
+      ngModel
+      required></textarea>
+  </label>
+  <input
+    type="submit"
+    value="Add post"
+    class="btn btn-success"
+    [disabled]="addPostForm.invalid">
+</form>

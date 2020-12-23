@@ -1,0 +1,185 @@
+<form
+  #registrationForm="ngForm"
+  ngNativeValidate
+  (ngSubmit)="registerUser(registrationForm)">
+
+  <h1 class="text-center">Sign Up</h1>
+
+  <label class="form-group">
+    <h6 class="text-dark">Name:</h6>
+    <input
+      type="text"
+      name="name"
+      class="form-control"
+      required
+      pattern="[a-zA-Z]{2,20}"
+      ngModel
+      #userName="ngModel"
+      [class]="{
+        'correct-input': userName.dirty && userName.valid,
+        'incorrect-input': userName.dirty && userName.invalid
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="userName.dirty && userName.invalid"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+      *ngIf="userName.dirty && userName.valid"></i>
+      <small
+        class="form-text text-danger"
+        *ngIf="userName.dirty && userName.invalid">
+          Only latin characters (from 2 to 20) are allowed.
+      </small>
+      <small
+        class="form-text text-danger"
+        *ngIf="isLoginUsedAlready">
+          This login is already in use
+      </small>
+
+  </label>
+
+  <label class="form-group">
+    <h6 class="text-dark">Surname:</h6>
+    <input
+      type="text"
+      name="surname"
+      class="form-control"
+      required
+      pattern="[a-zA-Z]{2,20}"
+      ngModel
+      #surname="ngModel"
+      [class]="{
+        'correct-input': surname.dirty && surname.valid,
+        'incorrect-input': surname.dirty && surname.invalid
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="surname.dirty && surname.invalid"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+      *ngIf="surname.dirty && surname.valid"></i>
+    <small
+      class="form-text text-danger"
+      *ngIf="surname.dirty && surname.invalid">
+        Only latin characters (from 2 to 20) are allowed.
+    </small>
+  </label>
+
+  <label class="form-group">
+    <h6 class="text-dark">Login:</h6>
+    <input
+      type="text"
+      name="login"
+      class="form-control"
+      required
+      pattern="[a-zA-Z\d_]{2,25}"
+      ngModel
+      #login="ngModel"
+      [class]="{
+        'correct-input': login.dirty && login.valid,
+        'incorrect-input': login.dirty && login.invalid
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="login.dirty && login.invalid"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+      *ngIf="login.dirty && login.valid"></i>
+    <small
+      class="form-text text-danger"
+      *ngIf="login.dirty && login.invalid">
+        Only latin characters (from 2 to 25) are allowed.
+    </small>
+  </label>
+
+  <label class="form-group">
+    <h6 class="text-dark">Password:</h6>
+    <input
+      type="password"
+      name="password"
+      class="form-control"
+      required
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$"
+      ngModel
+      #password="ngModel"
+      [class]="{
+        'correct-input': password.dirty && password.valid,
+        'incorrect-input': password.dirty && password.invalid
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="password.dirty && password.invalid"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+    *ngIf="password.dirty && password.valid"></i>
+    <small
+      class="form-text text-danger"
+      *ngIf="password.dirty && password.invalid">
+        Password must contain at least 5 characters including at least 1 number and both lower & uppercase letters
+    </small>
+  </label>
+
+  <label class="form-group">
+    <h6 class="text-dark">Confirm password:</h6>
+    <input
+      type="password"
+      class="form-control"
+      required
+      [pattern]="password.value"
+      name="confirmPassword"
+      ngModel
+      #confirmPassword="ngModel"
+      [class]="{
+        'correct-input': confirmPassword.value === password.value && confirmPassword.dirty && password.dirty,
+        'incorrect-input': confirmPassword.value !== password.value && confirmPassword.dirty && password.dirty
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="confirmPassword.value !== password.value && confirmPassword.dirty && password.dirty"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+      *ngIf="confirmPassword.value === password.value && confirmPassword.dirty && password.dirty"></i>
+    <small
+      class="form-text text-danger"
+      *ngIf="confirmPassword.value !== password.value && confirmPassword.dirty && password.dirty">
+        Passwords don't match
+    </small>
+  </label>
+
+  <label class="form-group">
+    <h6 class="text-dark">Email:</h6>
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      required
+      pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+      ngModel
+      #email="ngModel"
+      [class]="{
+        'correct-input':  email.dirty && email.valid,
+        'incorrect-input': email.dirty && email.invalid
+      }">
+    <i class="fas fa-times-circle error-icon input-icon"
+      *ngIf="email.dirty && email.invalid"></i>
+    <i class="fas fa-check-circle correct-icon input-icon"
+    *ngIf="email.dirty && email.valid"></i>
+  </label>
+
+  <div class="form-group">
+    <label>
+      <input
+        type="radio"
+        name="gender"
+        [(ngModel)]="radioBtnValue"
+        value="male"
+        class="radio-btn">
+      <span class="text-dark radio-btn-text">Male</span>
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="gender"
+        [(ngModel)]="radioBtnValue"
+        value="female"
+        class="radio-btn">
+      <span class="text-dark radio-btn-text">Female</span>
+    </label>
+  </div>
+
+  <input
+    type="submit"
+    value="Sign Up"
+    class="btn btn-success"
+    [disabled]="registrationForm.invalid">
+</form>

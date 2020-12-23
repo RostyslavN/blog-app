@@ -1,0 +1,21 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="username">
+    <span>Hello, </span>
+    <span class="navbar-brand">{{ currentUser.name || currentUser.login }}</span>
+  </div>
+  <input
+    type="button"
+    value="Log out"
+    class="btn btn-secondary"
+    (click)="logOut()">
+</nav>
+<app-add-post-form></app-add-post-form>
+<main>
+  <input
+    type="button"
+    value="Clear all posts"
+    class="btn btn-warning"
+    *ngIf="currentUser.login === 'Admin'"
+    (click)="clearAllPosts()">
+  <app-post *ngFor="let post of posts" [post]="post"></app-post>
+</main>
